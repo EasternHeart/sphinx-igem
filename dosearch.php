@@ -24,7 +24,6 @@ if(!$con)
 
 //print($_GET["search"]);
 
-$res = $sc->query($_GET["search"], 'test1'); // 执行查询，第一个参数查询的关键字，第二个查询的索引名称，mysql索引名称（这个也是在配置文件中定义的），多个索引名称以,分开，也可以用*表示所有索引。
 if(array_key_exists("start",$_GET) && array_key_exists("end",$_GET))
 {
 $start = $_GET["start"];
@@ -32,13 +31,21 @@ $end = $_GET["end"];
 $part = false;
 if(is_numeric($start) && is_numeric($end))
 {
-	$part = true;
+//	$part = true;
+if($start<=$end)
+{
+	$sc->SetLimits($start,$end-$start+1);
+	$json["part"] = "true";
+}
 }
 }
 else
 {
 	$part = false;
 }
+
+
+$res = $sc->query($_GET["search"], 'test1'); // 执行查询，第一个参数查询的关键字，第二个查询的索引名称，mysql索引名称（这个也是在配置文件中定义的），多个索引名称以,分开，也可以用*表示所有索引。
 
 if(!$res)
 {
