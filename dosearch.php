@@ -35,7 +35,7 @@ if(is_numeric($start) && is_numeric($end))
 if($start<=$end)
 {
 	$sc->SetLimits($start,$end-$start+1);
-	$json["part"] = "true";
+//	$json["part"] = "true";
 }
 }
 }
@@ -66,6 +66,7 @@ if($res['total_found'] == 0)
 else {
 
 $json["status"] = 200;
+$json["total_found"] = $res['total_found'];
 
 $ids = array_keys($res['matches']);
 $i = 0;
