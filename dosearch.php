@@ -1,17 +1,17 @@
 <?php
 
- 
+require('config.inc.php'); 
 
 include 'sphinxapi.php';  // 加载Sphinx API
 
 $sc = new SphinxClient(); // 实例化Api
 
-$sc->setServer('127.3.53.129', 15312); // 设置服务端，第一个参数sphinx服务器地址，第二个sphinx监听端口
+$sc->setServer($spsrv, $spport); // 设置服务端，第一个参数sphinx服务器地址，第二个sphinx监听端口
 
 //$sc->SetMatchMode(SPH_MATCH_FULLSCAN);
 $sc->SetMatchMode(SPH_MATCH_EXTENDED2);
 
-$con = mysql_connect('127.3.53.130:3306','adminQaQiK1g','RkiFn3UmYFhp');
+$con = mysql_connect($sqlconn,$sqlusern,$sqlpassw);
 
 mysql_select_db("sphinx", $con);
 
