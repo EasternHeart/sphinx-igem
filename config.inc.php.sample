@@ -4,4 +4,5 @@ $spport=9312;
 $sqlconn='127.3.53.130:3306';
 $sqlusern='root';
 $sqlpassw='rootisdangerous';
+$sqldb='test';
 ?>

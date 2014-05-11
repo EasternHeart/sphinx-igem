@@ -1,5 +1,7 @@
 <?php
 
+header('Content-Type:application/json;charset=utf-8'); 
+
 require('config.inc.php'); 
 
 include 'sphinxapi.php';  // 加载Sphinx API
@@ -13,7 +15,7 @@ $sc->SetMatchMode(SPH_MATCH_EXTENDED2);
 
 $con = mysql_connect($sqlconn,$sqlusern,$sqlpassw);
 
-mysql_select_db("sphinx", $con);
+mysql_select_db($sqldb, $con);
 
 if(!$con)
 {
