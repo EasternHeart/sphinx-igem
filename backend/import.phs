@@ -1,0 +1,57 @@
+<?php
+$filename=$argv[1];
+$names = array('part_id', 'part_name', 'part_short_name', 'part_short_desc', 'part_type', 'release_status', 'sample_status', 'part_results', 'part_nickname', 'part_rating', 'part_url', 'part_entered', 'part_author');
+$xml = simplexml_load_file($filename);
+if(!$xml)die('No file?!');
+$resultstr = '';
+foreach($names as $name)
+{
+$result[$name] = $xml->part_list->part->$name . '';
+$resultstr = $resultstr . ' ' . $result[$name];
+}
+
+echo $resultstr;
+//print_r($result);
+echo "\n";
+echo json_encode($result);
+
+include('../config.inc.php');
+include('../../config.inc.php');
+include('../../../config.inc.php');
+
+$con = mysql_connect($sqlconn,$sqlusern,$sqlpassw);
+
+mysql_select_db($sqldb, $con);
+
+if(!$con)
+	die('Cannot connect to MySQL');
+
+$myres = mysql_query("SELECT * FROM documents WHERE id=" . $result["part_id"]);
+
+$has = false;
+
+while($row = mysql_fetch_array($myres))
+{
+	$has = true;
+}
+
+if($has) die('Duplicate');
+
+$myres = mysql_query("SELECT * FROM details WHERE id=" . $result["part_id"]);
+
+while($row = mysql_fetch_array($myres))
+{
+	$has = true;
+}
+
+if($has) die('Data error');
+
+mysql_query("INSERT INTO documents VALUES (" . $result["part_id"]. ",0,0,NOW(),'" . $result["part_name"] . 
+	"','" . $resultstr . "')");
+
+mysql_query("INSERT INTO details VALUES (" . $result["part_id"]. ",'" . $result["part_name"] . "','" . json_encode($result) . "')");
+
+mysql_close($con);
+
+?>
+
