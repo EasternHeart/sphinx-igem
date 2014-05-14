@@ -16,7 +16,7 @@
   <body>
     <div class="row">
       <div class="col-lg-6">
-        <form action="dosearch.php">
+        <form action="dosui.php">
           <div class="input-group">
             <input type="text" class="form-control" name="search">
             <span class="input-group-btn">
