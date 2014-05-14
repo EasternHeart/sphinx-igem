@@ -16,8 +16,6 @@ echo "\n";
 echo json_encode($result);
 
 include('../config.inc.php');
-include('../../config.inc.php');
-include('../../../config.inc.php');
 
 $con = mysql_connect($sqlconn,$sqlusern,$sqlpassw);
 

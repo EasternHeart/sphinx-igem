@@ -1,8 +1,8 @@
 <?php
 
-header('Content-Type:application/json;charset=utf-8'); 
+require('config.inc.php');
 
-require('config.inc.php'); 
+$names = array('part_id', 'part_name', 'part_short_name', 'part_short_desc', 'part_type', 'release_status', 'sample_status', 'part_results', 'part_nickname', 'part_rating', 'part_url', 'part_entered', 'part_author');
 
 include 'sphinxapi.php';  // 加载Sphinx API
 
@@ -20,8 +20,7 @@ mysql_select_db($sqldb, $con);
 if(!$con)
 {
 	$json["status"] = 500;
-	echo json_encode($json);
-	exit(1);
+	goto done;
 }
 
 //print($_GET["search"]);
@@ -51,13 +50,8 @@ $res = $sc->query($_GET["search"], 'test1'); // 执行查询，第一个参数�
 if(!$res)
 {
 	$json["status"] = 500;
+	goto done;
 }
-
-/*echo '<pre>';
-print_r($res);
-echo '</pre>';*/
-
-//echo json_encode($res);
 
 if($res['total_found'] == 0)
 {
@@ -93,9 +87,33 @@ foreach($ids as $id)
 
 }
 
-echo json_encode($json);
+//echo json_encode($json);
 
 mysql_close($con);
+
+done:;
+
+function writeitem($subp)
+{
+?>
+<div class="row" style="padding: 0 15px;">
+<div class="media">
+  <a class="pull-left" href="#">
+    <img class="media-object" src="brick.png" alt="Brick">
+  </a>
+  <div class="media-body">
+    <h4 class="media-heading"><?php echo $subp->part_name; ?></h4>
+    <pre><?php
+	echo "Nickname: " . $subp->part_nickname . "\n";
+	echo "Short Name: " . $subp->part_short_name . "\n";
+	echo "Short Description: " . $subp->part_short_desc . "\n";
+?></pre>
+  </div>
+</div>
+</div>
+
+<?php	
+}
 
 ?>
 <!DOCTYPE html>
@@ -114,7 +132,20 @@ mysql_close($con);
     <![endif]-->
   </head>
   <body>
-    
+    <h1> Search result for <?php echo $_GET['search'] ?> </h1>
+    <?php
+	if($json["status"] == 500)
+		echo "<h2>Internal Server Error!</h2>";
+	else if($json["status"] == 404)
+		echo "<h2>Not Found:-(</h2>";
+	else
+	{
+		foreach($json["details"] as $det)
+		{
+			writeitem($det);
+		}
+	}
+    ?>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
