@@ -99,6 +99,7 @@ done:;
 
 function writeitem($subp)
 {
+if(!$subp)return;
 ?>
 <div class="row" style="padding: 0 15px;">
 <div class="media">
@@ -163,7 +164,7 @@ function pageurl($p)
 		{
 			writeitem($det);
 		}
-		$total_page = ($json["total_found"]+19)/20;
+		$total_page = (int)(($json["total_found"]+19)/20);
 		?>
 <ul class="pagination">
 <?php
@@ -172,11 +173,37 @@ if($page > 0)
 ?>
   <li><a href=<?php pageurl($page-1); ?> >&laquo;</a></li>
 <?php
+}else{
+?>
+  <li class="disabled"><a href="#">&laquo;</a></li>
+<?php
 }
 ?>
 
 <?php
-for($a = 0;$a<$total_page-1;$a++)
+$final_page = $total_page-2;
+$start_page = 0;
+$startpage = $endpage = false;
+if($final_page > 8)
+{
+	if($page <= $total_page-1-4)
+	{
+		$endpage = true;
+		$final_page = $page+4;
+	}
+	if($page >= 0+5)
+	{
+		$startpage = true;
+		$start_page = $page-4;
+	}
+}
+if($startpage)
+{
+?>
+<li><a href=<?php pageurl(0); ?> >1</a></li>
+<?php
+}
+for($a = $start_page;$a<=$final_page;$a++)
 {
 	if($a == $page)
 	{
@@ -193,34 +220,27 @@ for($a = 0;$a<$total_page-1;$a++)
 }
 ?>
 <?php
-if($page < $total_page-1)
+
+if($endpage)
+{
+?>
+<li><a href=<?php pageurl($total_page-2); ?> >...<?php echo $total_page-1;?></a></li>
+<?php
+}if($page < $total_page-2)
 {
 ?>
   <li><a href=<?php pageurl($page+1); ?> >&raquo;</a></li>
+<?php
+}else{
+?>
+  <li class="disabled"><a href="#">&raquo;</a></li>
 <?php
 }
 ?></ul>
 <?php
 	}
-    ?>
-    <ul class="pagination">
-<?php
-if($start >= 20)
-{ ?>
-      <li><a href=<?php echo "\"dosui.php?search=" . $_GET["search"] . "&start=" . ($start-20) . "&end=" . ($end-20) . "\"" ?> >&laquo;</a></li>
-<?php } ?>
-      <li><a href="#">1</a></li>
-      <li><a href="#">2</a></li>
-      <li><a href="#">3</a></li>
-      <li><a href="#">4</a></li>
-      <li><a href="#">5</a></li>
-<?php
-if($end <= $json["result_length"])
-{ ?>
-      <li><a href="#">&raquo;</a></li>
-<?php } ?>
-    </ul>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+?>
+   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
