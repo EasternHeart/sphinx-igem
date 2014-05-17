@@ -44,12 +44,7 @@ if($page >= 0)
 }
 else
 {
-<<<<<<< HEAD
 	$page = 0;
-=======
-	$start=0;
-	$end=19;
->>>>>>> 498804fba68af13fdc46df29c139fcdcbff6b97c
 	$part = false;
 }
 
