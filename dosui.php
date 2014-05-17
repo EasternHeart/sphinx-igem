@@ -44,7 +44,12 @@ if($page >= 0)
 }
 else
 {
+<<<<<<< HEAD
 	$page = 0;
+=======
+	$start=0;
+	$end=19;
+>>>>>>> 498804fba68af13fdc46df29c139fcdcbff6b97c
 	$part = false;
 }
 
@@ -203,6 +208,23 @@ if($page < $total_page-1)
 <?php
 	}
     ?>
+    <ul class="pagination">
+<?php
+if($start >= 20)
+{ ?>
+      <li><a href=<?php echo "\"dosui.php?search=" . $_GET["search"] . "&start=" . ($start-20) . "&end=" . ($end-20) . "\"" ?> >&laquo;</a></li>
+<?php } ?>
+      <li><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#">4</a></li>
+      <li><a href="#">5</a></li>
+<?php
+if($end <= $json["result_length"])
+{ ?>
+      <li><a href="#">&raquo;</a></li>
+<?php } ?>
+    </ul>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
