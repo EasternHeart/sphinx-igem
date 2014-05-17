@@ -25,22 +25,26 @@ if(!$con)
 
 //print($_GET["search"]);
 
-if(array_key_exists("start",$_GET) && array_key_exists("end",$_GET))
+if(array_key_exists("page",$_GET))
 {
-$start = $_GET["start"];
-$end = $_GET["end"];
+//$start = $_GET["start"];
+//$end = $_GET["end"];
+$page = $_GET["page"];
 $part = false;
-if(is_numeric($start) && is_numeric($end))
+//if(is_numeric($start) && is_numeric($end))
+if(is_numeric($page))
 {
-if($start<=$end)
+//if($start<=$end)
+if($page >= 0)
 {
-	$sc->SetLimits($start,$end-$start+1);
+	$sc->SetLimits($page*20,20);
 //	$json["part"] = "true";
 }
 }
 }
 else
 {
+	$page = 0;
 	$part = false;
 }
 
@@ -98,8 +102,13 @@ function writeitem($subp)
 ?>
 <div class="row" style="padding: 0 15px;">
 <div class="media">
-  <a class="pull-left" href="#">
-    <img class="media-object" src="brick.png" alt="Brick">
+  <a class="pull-left" href=<?php echo '"' . $subp->part_url . '"'; ?> >
+    <img class="media-object" src=<?php 
+if($subp->part_results == "Works")
+	echo '"brick_ok.png"';
+else
+	echo '"brick_notwork.png"';
+?> alt="Brick">
   </a>
   <div class="media-body">
     <h4 class="media-heading"><?php echo $subp->part_name; ?></h4>
@@ -107,12 +116,20 @@ function writeitem($subp)
 	echo "Nickname: " . $subp->part_nickname . "\n";
 	echo "Short Name: " . $subp->part_short_name . "\n";
 	echo "Short Description: " . $subp->part_short_desc . "\n";
+	echo "Type: " . $subp->part_type . "\n";
+	echo "Date Entered: " . $subp->part_entered . "\n";
+	echo "Author: " . $subp->part_author . "\n";
 ?></pre>
   </div>
 </div>
 </div>
 
 <?php	
+}
+
+function pageurl($p)
+{
+	echo '"dosui.php?search=' . $_GET["search"] . '&page=' . $p . '"';
 }
 
 ?>
@@ -138,12 +155,52 @@ function writeitem($subp)
 		echo "<h2>Internal Server Error!</h2>";
 	else if($json["status"] == 404)
 		echo "<h2>Not Found:-(</h2>";
+	else if($json["total_found"] <= ($page)*20)
+		echo "<h2> Page error: You've fallen into the outer space!</h2>";
 	else
 	{
 		foreach($json["details"] as $det)
 		{
 			writeitem($det);
 		}
+		$total_page = ($json["total_found"]+19)/20;
+		?>
+<ul class="pagination">
+<?php
+if($page > 0)
+{
+?>
+  <li><a href=<?php pageurl($page-1); ?> >&laquo;</a></li>
+<?php
+}
+?>
+
+<?php
+for($a = 0;$a<$total_page-1;$a++)
+{
+	if($a == $page)
+	{
+?>
+<li class="active"><a href="#"><?php echo $a+1; ?> <span class="sr-only">(current)</span></a></li>
+<?php
+	}
+	else
+	{
+?>
+  <li><a href=<?php pageurl($a); ?> ><?php echo $a+1; ?></a></li>
+<?php
+	}
+}
+?>
+<?php
+if($page < $total_page-1)
+{
+?>
+  <li><a href=<?php pageurl($page+1); ?> >&raquo;</a></li>
+<?php
+}
+?></ul>
+<?php
 	}
     ?>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
