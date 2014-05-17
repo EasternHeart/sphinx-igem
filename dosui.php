@@ -200,7 +200,7 @@ if($final_page > 8)
 if($startpage)
 {
 ?>
-<li><a href=<?php pageurl(0); ?> >1</a></li>
+<li><a href=<?php pageurl(0); ?> >1...</a></li>
 <?php
 }
 for($a = $start_page;$a<=$final_page;$a++)
