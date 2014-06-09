@@ -105,16 +105,22 @@ if(!$subp)return;
 <div class="media">
   <a class="pull-left" href=<?php echo '"' . $subp->part_url . '"'; ?> >
     <img class="media-object" src=<?php 
-/*if($subp->part_results == "Works")
+if($subp->part_results == "Works")
 	echo '"brick_ok.png"';
 else
-	echo '"brick_notwork.png"';*/
+	echo '"brick_notwork.png"';
 $picon = "http://parts.igem.org/images/partbypart/icon_" . strtolower($subp->part_type) . ".png";
 echo '"' . $picon . '"'
 ?> alt="Brick">
   </a>
   <div class="media-body">
-    <h4 class="media-heading"><a href=<?php echo '"' . $subp->part_url . '"'; ?> ><?php echo $subp->part_name; ?></a></h4>
+    <h4 class="media-heading">
+      <a href=<?php echo '"' . $subp->part_url . '"'; ?> ><?php echo $subp->part_name; ?></a>
+      <img src=<?php 
+$picon = "http://parts.igem.org/images/partbypart/icon_" . strtolower($subp->part_type) . ".png";
+echo '"' . $picon . '"'
+?> alt=<?php echo $subp->part_type; ?> ></img>
+</h4>
     <pre><?php
 	echo "Nickname: " . $subp->part_nickname . "\n";
 	echo "Short Name: " . $subp->part_short_name . "\n";
