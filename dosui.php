@@ -112,7 +112,7 @@ else
 ?> alt="Brick">
   </a>
   <div class="media-body">
-    <h4 class="media-heading"><?php echo $subp->part_name; ?></h4>
+    <h4 class="media-heading"><a href=<?php echo '"' . $subp->part_url . '"'; ?> ><?php echo $subp->part_name; ?></a></h4>
     <pre><?php
 	echo "Nickname: " . $subp->part_nickname . "\n";
 	echo "Short Name: " . $subp->part_short_name . "\n";
@@ -140,7 +140,7 @@ function pageurl($p)
     <title>Result page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -241,8 +241,8 @@ if($endpage)
 	}
 ?>
    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <!-- <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script> -->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <!-- <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script> -->
   </body>
 </html>
