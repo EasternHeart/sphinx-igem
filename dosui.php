@@ -105,10 +105,12 @@ if(!$subp)return;
 <div class="media">
   <a class="pull-left" href=<?php echo '"' . $subp->part_url . '"'; ?> >
     <img class="media-object" src=<?php 
-if($subp->part_results == "Works")
+/*if($subp->part_results == "Works")
 	echo '"brick_ok.png"';
 else
-	echo '"brick_notwork.png"';
+	echo '"brick_notwork.png"';*/
+$picon = "http://parts.igem.org/images/partbypart/icon_" . strtolower($subp->part_type) . ".png";
+echo '"' . $picon . '"'
 ?> alt="Brick">
   </a>
   <div class="media-body">
