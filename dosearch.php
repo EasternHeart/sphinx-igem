@@ -1,5 +1,8 @@
 <?php
 
+
+error_reporting(E_ERROR);
+
 header('Content-Type:application/json;charset=utf-8'); 
 
 require('config.inc.php'); 
@@ -64,6 +67,14 @@ if($res['total_found'] == 0)
 {
 	//echo '<h1> Not Found! </h1>';
 	$json["status"] = 404;
+		if (!strrchr($_GET["search"],"*"))
+		{
+			if (array_key_exists("start",$_GET) && array_key_exists("end",$_GET))
+				header("Location: $thisurl/dosearch.php?search=" . $_GET["search"] . "*&start=" . $_GET["start"] . "&end=" . $_GET["end"]);
+			else
+				header("Location: $thisurl/dosearch.php?search=" . $_GET["search"] . "*");
+		}
+
 }
 else {
 

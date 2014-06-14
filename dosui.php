@@ -1,5 +1,6 @@
 <?php
 
+
 require('config.inc.php');
 
 $names = array('part_id', 'part_name', 'part_short_name', 'part_short_desc', 'part_type', 'release_status', 'sample_status', 'part_results', 'part_nickname', 'part_rating', 'part_url', 'part_entered', 'part_author');
@@ -61,6 +62,11 @@ if($res['total_found'] == 0)
 {
 	//echo '<h1> Not Found! </h1>';
 	$json["status"] = 404;
+	
+		if (!strrchr($_GET["search"],"*"))
+		{
+			header("Location: $thisurl/dosui.php?search=" . $_GET["search"] . "*");
+		}
 }
 else {
 
@@ -163,7 +169,14 @@ function pageurl($p)
 	if($json["status"] == 500)
 		echo "<h2>Internal Server Error!</h2>";
 	else if($json["status"] == 404)
-		echo "<h2>Not Found:-(</h2>";
+	{
+		echo "<h2>Not Found:-( ";
+//		if (!strrchr($_GET["search"],"*"))
+//		{
+//                    echo "<a href='dosui.php?search=" . $_GET["search"] . "*'>You can try clicking here.</a>";
+//		}
+		echo "</h2>";
+	}
 	else if($json["total_found"] <= ($page)*20)
 		echo "<h2> Page error: You've fallen into the outer space!</h2>";
 	else

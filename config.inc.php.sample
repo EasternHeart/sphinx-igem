@@ -5,4 +5,5 @@ $sqlconn='127.3.53.130:3306';
 $sqlusern='root';
 $sqlpassw='rootisdangerous';
 $sqldb='test';
+$thisurl='http://127.0.0.1/'
 ?>
