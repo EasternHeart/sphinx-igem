@@ -1,5 +1,7 @@
 <?php
 
+error_reporting(E_ERROR);
+
 
 require('config.inc.php');
 
@@ -65,7 +67,7 @@ if($res['total_found'] == 0)
 	
 		if (!strrchr($_GET["search"],"*"))
 		{
-			header("Location: $thisurl/dosui.php?search=" . $_GET["search"] . "*");
+			header("Location: $thisurl/dosui.php?search=" . $_GET["search"] . "*&redir=1");
 		}
 }
 else {
@@ -155,6 +157,7 @@ function pageurl($p)
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="search.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -164,7 +167,22 @@ function pageurl($p)
     <![endif]-->
   </head>
   <body>
-    <h1> Search result for <?php echo $_GET['search'] ?> </h1>
+  <div class="ctr"><img src="igem_logo.png" alt="iGEM SKLBC_HS" style="height:20%;" class="img-thmubnail ctr"></img></div>
+
+  
+<!--  <h2><ctr><img src="igem_logo.png" alt="iGEM SKLBC_HS" style="height:20%;" class="img-thmubnail"></img></ctr></h2>-->
+  <h3 class="ctr">
+    <?php
+	if($_GET["redir"] == "1")
+	{ ?>
+	 Nothing found for the previous search, but this results for <?php echo $_GET['search'] ?> may be needed by you. 
+	<?php
+	}
+	else {
+	?>
+	Search result for <?php echo $_GET['search'] ?> 
+	<?php } ?>
+	</h3>
     <?php
 	if($json["status"] == 500)
 		echo "<h2>Internal Server Error!</h2>";
@@ -187,7 +205,7 @@ function pageurl($p)
 		}
 		$total_page = (int)(($json["total_found"]+19)/20);
 		?>
-<ul class="pagination">
+<div class="ctr"><ul class="pagination">
 <?php
 if($page > 0)
 {
@@ -257,10 +275,11 @@ if($endpage)
   <li class="disabled"><a href="#">&raquo;</a></li>
 <?php
 }
-?></ul>
+?></ul></div>
 <?php
 	}
 ?>
+	<div class="ctr">By <a href="http://2014hs.igem.org/Team:SKLBC-China">iGEM SKLBC_HS 2014.</a></div>
    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!-- <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script> -->
     <!-- Include all compiled plugins (below), or include individual files as needed -->

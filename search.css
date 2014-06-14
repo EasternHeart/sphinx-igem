@@ -1,5 +1,11 @@
-#mainspan {
-	text-align:center;
-	margin-left:auto; 
-	margin-right:auto;
+.ctr{
+	align: center;
+	text-align: center;
+}
+
+.bigctr{
+	align: center;
+	text-align: center;
+	width: 80%;
+	min-width:480px;
 }

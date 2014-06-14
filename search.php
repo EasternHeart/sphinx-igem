@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="search.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -14,18 +15,17 @@
     <![endif]-->
   </head>
   <body>
-    <div class="row">
-      <div class="col-lg-6">
+    <div class="ctr"><center>
+        <div class="ctr"><img src="igem_logo.png"></img></div>
         <form action="dosui.php">
-          <div class="input-group">
-            <input type="text" class="form-control" name="search">
+          <div class="input-group" class="bigctr">
+            <input type="text" class="form-control" name="search" maxlength=100 placeholder="Input your search expression.">
             <span class="input-group-btn">
               <button class="btn btn-default" type="submit">Brick!</button>
             </span>
           </div><!-- /input-group -->
         </form>
-      </div>
-    </div>
+    </center></div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
