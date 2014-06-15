@@ -130,12 +130,12 @@ echo '"' . $picon . '"'
 ?> alt=<?php echo $subp->part_type; ?> ></img>
 </h4>
     <pre><?php
-	echo "Nickname: " . $subp->part_nickname . "\n";
-	echo "Short Name: " . $subp->part_short_name . "\n";
-	echo "Short Description: " . $subp->part_short_desc . "\n";
-	echo "Type: " . $subp->part_type . "\n";
-	echo "Date Entered: " . $subp->part_entered . "\n";
-	echo "Author: " . $subp->part_author . "\n";
+	echo "<clbold>Nickname:</clbold> " . $subp->part_nickname . "\n";
+	echo "<clbold>Short Name:</clbold> " . $subp->part_short_name . "\n";
+	echo "<clbold>Short Description:</clbold> " . $subp->part_short_desc . "\n";
+	echo "<clbold>Type:</clbold> " . $subp->part_type . "\n";
+	echo "<clbold>Date Entered:</clbold> " . $subp->part_entered . "\n";
+	echo "<clbold>Author:</clbold> " . $subp->part_author . "\n";
 ?></pre>
   </div>
 </div>
@@ -175,12 +175,12 @@ function pageurl($p)
     <?php
 	if($_GET["redir"] == "1")
 	{ ?>
-	 Nothing found for the previous search, but this results for <?php echo $_GET['search'] ?> may be needed by you. 
+	 Nothing found for the previous search, but this results for "<?php echo $_GET['search'] ?>" may be needed by you. 
 	<?php
 	}
 	else {
 	?>
-	Search result for <?php echo $_GET['search'] ?> 
+	Search result for "<?php echo $_GET['search'] ?>" 
 	<?php } ?>
 	</h3>
     <?php
