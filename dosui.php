@@ -279,7 +279,7 @@ if($endpage)
 <?php
 	}
 ?>
-	<div class="ctr">By <a href="http://2014hs.igem.org/Team:SKLBC-China">iGEM SKLBC_HS 2014.</a></div>
+	<div class="ctr">By <a href="http://2014hs.igem.org/Team:SKLBC-China">iGEM SKLBC-China 2014.</a></div>
    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!-- <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script> -->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
