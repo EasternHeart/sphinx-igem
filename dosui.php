@@ -136,6 +136,15 @@ echo '"' . $picon . '"'
 	echo "<clbold>Type:</clbold> " . $subp->part_type . "\n";
 	echo "<clbold>Date Entered:</clbold> " . $subp->part_entered . "\n";
 	echo "<clbold>Author:</clbold> " . $subp->part_author . "\n";
+	echo "<clbold>Release Status:</clbold> " . $subp->release_status . "\n";
+	echo "<clbold>Sample Status:</clbold> " . $subp->sample_status . "\n";
+        echo "<clbold>Rating:</clbold> ";
+	for($i = 0;$i<$subp->part_rating;$i++)
+	{
+		echo "<img src=\"star.svg\" alt=\"★\" />";
+	}
+	echo "\n";
+	echo "<clbold>Results:</clbold> " . $subp->part_results . "\n";
 ?></pre>
   </div>
 </div>
@@ -155,6 +164,7 @@ function pageurl($p)
   <head>
     <title>Result page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
     <!-- Bootstrap -->
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="search.css">
